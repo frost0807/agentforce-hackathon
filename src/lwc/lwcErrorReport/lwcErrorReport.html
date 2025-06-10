@@ -1,0 +1,131 @@
+<!--
+ - Created by Jiae.Tak on 2025-05-28.
+ -->
+
+<!-- Lwc Error Report with Typing Animation -->
+<template>
+    <div class="container slds-p-around_medium">
+        <template if:true={error}>
+            <div class="slds-box slds-theme_error slds-m-around_medium">
+                <p>오류 발생: {error}</p>
+                <template if:false={errorReportData.hasPredictions}>
+                    <p>{errorReportData.message}</p>
+                </template>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+            <div class="suggest_info slds-m-bottom_medium">
+                <span class="title slds-text-heading_medium">💡 Agentron 예측 에러 리포트</span>
+
+<!--                &lt;!&ndash; 타이핑 애니메이션 건너뛰기 버튼 &ndash;&gt;-->
+<!--                <template if:true={isTyping}>-->
+<!--                    <lightning-button-->
+<!--                            label="⚡ 애니메이션 건너뛰기"-->
+<!--                            variant="neutral"-->
+<!--                            size="small"-->
+<!--                            onclick={skipTypingAnimation}-->
+<!--                            class="skip-animation-btn">-->
+<!--                    </lightning-button>-->
+<!--                </template>-->
+            </div>
+
+            <div class="item slds-card slds-p-around_small">
+                <span class="slds-text-heading_small slds-m-bottom_small slds-p-bottom_x-small">예측 에러증상 리스트</span>
+                <div class="detail slds-m-top_small">
+                    <template if:true={errorReportData.hasPredictions}>
+                        <!-- 타이핑 애니메이션으로 표시되는 아이템들 -->
+                        <template for:each={displayedItems} for:item="item">
+                            <div key={item.uniqueId}
+                                 class="risk-item-card slds-card slds-p-around_medium slds-m-bottom_medium typing-item-container"
+                                 data-item-index={item.displayIndex}>
+
+                                <!-- 항상 동일한 구조로 표시 -->
+                                <div class="item-content">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_small">
+                                        <lightning-icon icon-name={item.severityIcon} size="small" class={item.severityClass}></lightning-icon>
+                                        <span class="slds-m-left_small slds-text-heading_medium slds-text-font_bold">{item.componentName}</span>
+                                        <lightning-badge label={item.faultSeverityLevel} class={item.severityBadgeClass} slds-m-left_medium></lightning-badge>
+                                        <span class="slds-m-left_small slds-text-color_weak slds-text-body_small">({item.expectedFaultDate} 예측)</span>
+                                    </div>
+
+                                    <div class="slds-grid slds-wrap risk-item-detail-content">
+                                        <div class="slds-col slds-size_1-of-2 slds-small-size_1-of-1 slds-m-bottom_x-small">
+                                            <strong>고장 예측일:</strong>
+                                            <span class="typing-target" data-field="expectedFaultDate">{item.expectedFaultDate}</span>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-small-size_1-of-1 slds-m-bottom_x-small">
+                                            <strong>부품 수명:</strong>
+                                            <span class="typing-target" data-field="componentLifeExpectancy">{item.componentLifeExpectancy}</span>
+                                        </div>
+
+                                        <div class="slds-col slds-size_1-of-1 slds-m-vertical_x-small">
+                                            <p class="slds-text-heading_label slds-m-bottom_xx-small">사용량 분석</p>
+                                            <p class="typing-target" data-field="usageAnalysis">{item.usageAnalysis}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-m-vertical_x-small">
+                                            <p class="slds-text-heading_label slds-m-bottom_xx-small">고장 이력 요약</p>
+                                            <p class="typing-target" data-field="faultHistorySummary">{item.faultHistorySummary}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-m-vertical_x-small">
+                                            <p class="slds-text-heading_label slds-m-bottom_xx-small">예측 원인</p>
+                                            <p class="typing-target" data-field="riskReason">{item.riskReason}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-m-vertical_x-small">
+                                            <p class="slds-text-heading_label slds-m-bottom_xx-small">권장 조치</p>
+                                            <p class="slds-text-color_success slds-text-font_bold typing-target" data-field="recommendedAction">{item.recommendedAction}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-m-vertical_x-small">
+                                            <p class="slds-text-heading_label slds-m-bottom_xx-small">예상 영향</p>
+                                            <p class="slds-text-color_destructive slds-text-font_bold typing-target" data-field="impactDescription">{item.impactDescription}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-small-size_1-of-1 slds-m-bottom_x-small">
+                                            <strong>자가 수리 예상 비용:</strong>
+                                            <span class="typing-target" data-field="selfRepairCost">{item.selfRepairCost}</span>원
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-small-size_1-of-1 slds-m-bottom_x-small">
+                                            <strong>외부 수리 예상 비용:</strong>
+                                            <span class="typing-target" data-field="externalRepairCost">{item.externalRepairCost}</span>원
+                                        </div>
+                                        <template if:true={item.costComparisonMessage}>
+                                            <div class="slds-col slds-size_1-of-1 slds-m-vertical_x-small">
+                                                <p class="slds-text-heading_label slds-m-bottom_xx-small">비용 비교</p>
+                                                <p class="slds-text-color_weak typing-target" data-field="costComparisonMessage">{item.costComparisonMessage}</p>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:false={errorReportData.hasPredictions}>
+                        <p>{errorReportData.message}</p>
+                    </template>
+                </div>
+            </div>
+
+            <!-- 차트는 모든 타이핑이 완료된 후 표시 -->
+            <template if:true={errorReportData.hasPredictions}>
+                <template if:false={isTyping}>
+                    <div class="item slds-card slds-p-around_small slds-m-top_medium">
+                        <span class="slds-text-heading_small slds-m-bottom_small slds-p-bottom_x-small">예상 비용 분석 차트</span>
+                        <div class="slds-grid slds-gutters slds-wrap slds-m-top_small">
+                            <div class="slds-col slds-size_1-of-2 slds-small-size_1-of-1 slds-var-m-bottom_medium">
+                                <h3 class="slds-text-heading_small slds-var-m-bottom_small">고장 유형별 예상 비용</h3>
+                                <div class="chart-canvas-container">
+                                    <canvas class="pieChart" role="img" aria-label="고장 유형별 예상 비용"></canvas>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-small-size_1-of-1 slds-var-m-bottom_medium">
+                                <h3 class="slds-text-heading_small slds-var-m-bottom_small">총 유지보수 비용</h3>
+                                <div class="chart-canvas-container">
+                                    <canvas class="barChart" role="img" aria-label="총 유지보수 비용 비교"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </template>
+    </div>
+</template>

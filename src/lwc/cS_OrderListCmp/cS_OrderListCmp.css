@@ -1,0 +1,250 @@
+/**
+ * Created by Jiae.Tak on 2025-05-23.
+ */
+.product-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.product-title {
+  text-align: left;
+  font-size: 28px;
+  font-weight: 600;
+  margin-left:20px;
+  margin-right:30px;
+}
+
+
+.product-body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-left:20px;
+
+}
+
+.product-image-box {
+  width: 240px;
+  height: 240px;
+  padding: 12px;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.product-image-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.product-info {
+  flex: 1;
+  min-width: 240px;
+}
+
+.product-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-info li {
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #ff6666;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #333;
+}
+
+.suggest_info {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid #EAEDEF;
+    margin-top : 20px;
+    background : #F7F9FA;
+}
+.suggest_info .title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+
+/*2번 부터*/
+.order-container {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #fff;
+}
+
+.order-header {
+  position: relative;
+  display: flex;
+  padding: 16px 20px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #F7F9FA;
+}
+
+.order-header .order-number {
+  font-family: 'PreSemi';
+  font-weight: bold;
+}
+
+.order-header .date {
+  flex: 1;
+  color: #424242;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-item {
+  display: flex;
+  flex-direction: column; /* 세로 방향 */
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.order-item-highlight {
+  display: flex;
+  flex-direction: column; /* 세로 방향 */
+  gap: 12px;
+  padding: 12px;
+  border: 2px solid #f35050c4;
+  border-radius: 8px;
+}
+
+
+
+/* 제품명 및 가격 한 줄 */
+.product-header {
+  display: flex;
+/*  justify-content: space-between; *//* 좌우 나누기 */
+  align-items: center;
+}
+
+.product-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #2f3438;
+}
+
+.product-price {
+  font-size: 14px;
+  color: #000;
+}
+
+/* 아래: 사진과 상세내역 가로 정렬 */
+.product-body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* 사진 영역 스타일 */
+.product-thumbnail {
+  width: 100px;
+  height: 100px;
+  padding: 12px;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.product-thumbnail img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* 상세내역는 가로 남은 공간 차지 */
+.product-details {
+  flex: 1;
+}
+
+/* 상세내역 텍스트 스타일 */
+.product-info {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.product-info ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.product-info li {
+  margin-bottom: 4px;
+}
+
+.product-badge {
+    display: inline-block;
+    background-color: #ff6666;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* 필요하면 하이라이트 클래스 추가 */
+.product-highlight {
+  font-weight: 600;
+  color: #d9534f; /* 예: 강조용 빨간색 */
+}
+
+.divider {
+  background-color: #fff;
+  padding: 0;
+  margin: 20px;
+  border: 0;
+  height: 0;
+  border-top: 1px solid #cfc9c9;
+}

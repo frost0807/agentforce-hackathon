@@ -1,0 +1,77 @@
+/**
+ * Created by Jiae.Tak on 2025-05-23.
+ */
+
+ .case-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+/*    border: 1px solid #eee;
+    border-radius: 8px;*/
+ }
+
+.suggest_info {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid #EAEDEF;
+    background : #F7F9FA;
+}
+
+.suggest_info .title {
+     text-align: left;
+     font-size: 20px;
+     font-weight: 600;
+     margin-bottom: 15px;
+ }
+
+
+.case-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.case-number {
+   width: 40px;
+    height: 40px;
+    background-color: #51a1e6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* 줄어들지 않도록 고정 */
+    margin-top: 4px; /* 내용과 수직정렬 약간 조정 */
+    margin-left: 10px;
+}
+
+ .case-detail {
+    flex: 1;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+ }
+.case-detail ul {
+   margin: 0;
+   padding-left: 16px; /* 기본 글머리 기호 나오는 영역 */
+   list-style-type: disc; /* 기본 글머리 기호 유지 */
+}
+
+.case-detail li {
+   margin-bottom: 4px;
+   font-size: 15px;
+}

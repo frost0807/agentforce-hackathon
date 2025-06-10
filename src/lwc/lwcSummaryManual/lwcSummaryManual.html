@@ -1,0 +1,42 @@
+<!--
+ - Created by Jiae.Tak on 2025-05-29.
+ -->
+
+<!-- Lwc Summary Manual -->
+<template>
+    <div class="container">
+        <div class="suggest_info">
+            <span class="title">💡 Agentron 메뉴얼</span>
+        </div>
+
+        <div class="manual_section">
+            <div class="manual_block">
+                <h3>✅ 자가 점검 항목 가이드</h3>
+                <ul>
+                    <template for:each={manualSummary.checklist} for:item="item">
+                        <li key={item}>{item}</li>
+                    </template>
+                </ul>
+                <p class="safety-note">⚠️ {manualSummary.safetyNote}</p>
+            </div>
+
+            <div class="manual_block">
+                <h3>✅ 유지보수 권고 및 후속 조치</h3>
+                <ul>
+                    <template for:each={manualSummary.recommendations} for:item="item">
+                        <li key={item}>{item}</li>
+                    </template>
+                </ul>
+            </div>
+
+            <div class="manual_block">
+                <h3>🔧 지원 가능한 서비스</h3>
+                <ul>
+                    <template for:each={manualSummary.services} for:item="item">
+                        <li key={item}>{item}</li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>

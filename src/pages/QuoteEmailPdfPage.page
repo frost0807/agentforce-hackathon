@@ -1,0 +1,76 @@
+<!--
+ - Created by 최준석 on 2025-06-09.
+ -->
+<apex:page id="QuoteEmailPdfPage" standardController="ServiceQuote__c" extensions="QuoteEmailPdfController"
+           renderAs="pdf" applyHtmlTag="false" showHeader="false" sidebar="false">
+    <html>
+    <head>
+        <meta charset="UTF-8"/>
+        <style>
+            body {
+                font-family: Arial Unicode MS, sans-serif;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+            }
+
+            th, td {
+                border: 1px solid #ccc;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            h1, h2 {
+                color: #333;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>견적서 (Quote)</h1>
+    <hr/>
+    <h2>고객 정보</h2>
+    <p><strong>고객사:</strong> {!ServiceQuote__c.AccountId__r.Name}</p>
+    <p><strong>견적 번호:</strong> {!ServiceQuote__c.OfferNo__c}</p>
+    <p><strong>견적 일자:</strong>
+        <apex:outputText value="{0,date,yyyy-MM-dd}">
+            <apex:param value="{!ServiceQuote__c.QuoteDate__c}"/>
+        </apex:outputText>
+    </p>
+
+    <h2>견적 항목</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>품목명</th>
+            <th>수량</th>
+            <th>단가</th>
+            <th>금액</th>
+        </tr>
+        </thead>
+        <tbody>
+        <apex:repeat value="{!lineItems}" var="item">
+            <tr>
+                <td>{!item.ProductId__r.Name}</td>
+                <td>
+                    <apex:outputText value="{!item.Quantity__c}"/>
+                </td>
+                <td>
+                    <apex:outputText value="{!item.UnitPrice__c}"/>
+                </td>
+                <td>
+                    <apex:outputText value="{!item.Quantity__c * item.UnitPrice__c}"/>
+                </td>
+            </tr>
+        </apex:repeat>
+        </tbody>
+    </table>
+    </body>
+    </html>
+</apex:page>

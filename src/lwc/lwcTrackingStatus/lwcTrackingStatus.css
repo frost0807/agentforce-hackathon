@@ -1,0 +1,409 @@
+.order-detail-container {
+    padding: 40px 60px;
+    font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #333;
+}
+
+/* 브레드크럼 */
+.breadcrumb {
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.breadcrumb .separator {
+    margin: 0 6px;
+    color: #aaa;
+}
+
+.breadcrumb .current {
+    color: #aaa;
+    font-weight: 400;
+}
+
+/* 페이지 제목 */
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 15px 0;
+    letter-spacing: -0.5px;
+}
+
+/* 주문 정보 */
+.order-info {
+    color: #888; /* #666에서 #888로 변경 (더 연하게) */
+    font-size: 14px; /* 16px에서 14px로 변경 */
+    margin-bottom: 40px; /* 60px에서 40px로 줄임 */
+    margin-top: -10px; /* -5px에서 -10px로 더 위로 붙이기 */
+    font-weight: 600;
+}
+
+.order-date {
+    margin-right: 5px;
+    color: #888; /* #666에서 #888로 변경 (더 연하게) */
+}
+
+.order-number {
+    color: #888; /* #666에서 #888로 변경 (더 연하게) */
+}
+
+/* 구매현황 섹션 */
+.purchase-status-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 30px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.update-date {
+    font-size: 14px; /* 16px에서 14px로 변경 */
+    color: #888; /* #666에서 #888로 변경 (더 연하게) */
+    font-weight: 600;
+}
+
+/* 프로그레스 바 */
+.progress-container {
+    margin: 0;
+    position: relative;
+    height: 50px;
+}
+
+.progress-bar {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding: 0;
+    height: 100%;
+}
+
+.progress-line {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    right: 8px;
+    height: 16px;
+    background: #e0e0e0;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 83.33%;
+    background: #7885DB;
+    border-radius: 8px 0 0 8px;
+    z-index: 2;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}
+
+.step-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    margin-bottom: 8px;
+    border: 2px solid #e0e0e0;
+    box-sizing: border-box;
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.progress-step.active .step-circle {
+    background: #ffffff;
+    border: 2px solid #7885DB;
+}
+
+.progress-step:not(.active) .step-circle {
+    background: #e0e0e0;
+    border: 2px solid #e0e0e0;
+}
+
+.step-label {
+    font-size: 12px;
+    color: #7885DB;
+    text-align: center;
+    line-height: 1.3;
+    word-break: keep-all;
+    font-weight: 500;
+    max-width: 80px;
+    white-space: nowrap;
+}
+
+.progress-step:not(.active) .step-label {
+    color: #ccc;
+}
+
+/* 배송/시공일자 섹션 - 심플한 스타일 */
+.delivery-schedule-section {
+    margin-top: 40px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 25px;
+    background-color: #ffffff;
+}
+
+.subsection-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 20px 0;
+}
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+}
+
+.schedule-list::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 20px;
+    height: calc(100% - 40px);
+    width: 1px;
+    background: #ddd;
+    z-index: 1;
+}
+
+.schedule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+    padding: 12px 0;
+}
+
+.schedule-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+}
+
+.schedule-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #7885DB;
+    flex-shrink: 0;
+}
+
+.schedule-item:first-child .schedule-dot {
+    background: #4CAF50;
+}
+
+.schedule-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.schedule-description {
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.schedule-datetime {
+    color: #777;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-top: 2px;
+}
+
+.schedule-location {
+    color: #999;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-top: 1px;
+}
+
+/* 기존 schedule-text 스타일 유지 (호환성) */
+.schedule-text {
+    color: #333;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .order-detail-container {
+        padding: 20px;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    /* 모바일에서도 폰트 크기 조정 */
+    .order-info {
+        font-size: 13px; /* 모바일에서도 살짝 줄임 */
+    }
+
+    .update-date {
+        font-size: 13px; /* 모바일에서도 살짝 줄임 */
+    }
+
+    .progress-line {
+        left: 8px;
+        right: 8px;
+        height: 6px;
+    }
+
+    .progress-line::before {
+        height: 6px;
+    }
+
+    .step-circle {
+        width: 14px;
+        height: 14px;
+        margin-top: 1px;
+    }
+
+    .step-label {
+        font-size: 10px;
+        max-width: 60px;
+    }
+
+    .section-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        font-size: 16px;
+    }
+
+    .delivery-schedule-section {
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    .schedule-item {
+        padding: 10px 0;
+        gap: 10px;
+    }
+
+    .schedule-description {
+        font-size: 13px;
+    }
+
+    .schedule-datetime {
+        font-size: 12px;
+    }
+
+    .schedule-location {
+        font-size: 11px;
+    }
+
+    .schedule-list::before {
+        left: 5px;
+    }
+
+    .schedule-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-detail-container {
+        padding: 15px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    /* 작은 모바일에서도 폰트 크기 조정 */
+    .order-info {
+        font-size: 12px;
+    }
+
+    .update-date {
+        font-size: 12px;
+    }
+
+    .progress-line {
+        left: 6px;
+        right: 6px;
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    .progress-line::before {
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    .step-circle {
+        width: 12px;
+        height: 12px;
+        margin-top: 1px;
+    }
+
+    .step-label {
+        font-size: 9px;
+        max-width: 50px;
+    }
+
+    .delivery-schedule-section {
+        padding: 15px;
+        margin-top: 25px;
+    }
+
+    .schedule-item {
+        padding: 8px 0;
+        gap: 8px;
+    }
+
+    .schedule-description {
+        font-size: 12px;
+    }
+
+    .schedule-datetime {
+        font-size: 11px;
+    }
+
+    .schedule-location {
+        font-size: 10px;
+    }
+
+    .schedule-list::before {
+        left: 4px;
+    }
+
+    .schedule-dot {
+        width: 9px;
+        height: 9px;
+    }
+}

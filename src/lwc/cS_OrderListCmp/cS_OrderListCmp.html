@@ -1,0 +1,137 @@
+<!--
+ - Created by Jiae.Tak on 2025-05-23.
+ -->
+
+<!-- CS Order List Cmp -->
+<template>
+    <lightning-button
+            label="페이지 이동"
+            onclick={handleStartChat}
+            variant="brand">
+    </lightning-button>
+
+    <div class="product-container">
+        <h2 class="product-title">제품명 : {productData.productName}</h2>
+
+        <div class="product-body">
+            <div class="product-image-box">
+                <img src={productData.imageUrl} alt="제품 이미지"/>
+            </div>
+
+            <div class="product-info">
+                <ul>
+                    <li>구입일: {productData.purchaseDate}</li>
+                    <li>총 수리 횟수: <span class="badge">{productData.totalRepairCount}회</span></li>
+                    <li>출장서비스 횟수: {productData.visitServiceCount}회</li>
+                    <li>평균 대기 시간: {productData.averageWaitDays}일</li>
+                    <li class="highlight">최종 수리일: {productData.lastRepairDate}</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <template for:each={formattedParts} for:item="part" for:index="index">
+            <div key={part.id} class={part.cssClass}>
+                <div class="product-header">
+                    <div class="product-title">부품 : {part.name}</div>
+                    <div class="product-price">
+                        {part.formattedPrice} · {part.formattedQuantity}
+                    </div>
+                </div>
+                <div class="product-body">
+                    <div class="product-thumbnail">
+                        <img src={part.imageUrl} alt="제품 이미지"/>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-info">
+                            <ul>
+                                <li>총 수리 횟수: <span class="product-badge">{part.repairCount}회</span></li>
+                                <li>출장서비스 횟수: {part.visitCount}회</li>
+                                <li>평균 대기 시간: {part.waitDays}일</li>
+                                <li class="product-highlight">최종 수리일: {part.lastRepair}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>
+
+<!--
+<template>
+    <div class="product-container">
+        <h2 class="product-title">제품명 : WIZ0050C</h2>
+
+        <div class="product-body">
+            <div class="product-image-box">
+                <img src="wiz0050c.png" alt="제품 이미지"/>
+            </div>
+
+            <div class="product-info">
+                <ul>
+                    <li>구입일: 2016-12-05</li>
+                    <li>총 수리 횟수: <span class="badge">8회</span></li>
+                    <li>출장서비스 횟수: 3회</li>
+                    <li>평균 대기 시간: 10일</li>
+                    <li class="highlight">최종 수리일: 2025-05-03</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="divider">
+        &lt;!&ndash;    <div class="order-container">&ndash;&gt;
+        &lt;!&ndash;        <div class="order-header">
+                    <span class="order-number">주문_[LS IMM USA LLC] LSG0900H_2EA</span>
+                    <span class="date">2024.05.23</span>
+                </div>&ndash;&gt;
+
+        <div class="order-item-highlight">
+            <div class="product-header">
+                <div class="product-title">부품 : 통신포트</div>
+                <div class="product-price">339,900원 · 1개</div>
+            </div>
+            <div class="product-body">
+                <div class="product-thumbnail">
+                    <img src="test1.png" alt="제품 이미지"/>
+                </div>
+                <div class="product-details">
+                    <div class="product-info">
+                        <ul>
+                            <li>총 수리 횟수: <span class="product-badge">8회</span></li>
+                            <li>출장서비스 횟수: 3회</li>
+                            <li>평균 대기 시간: 10일</li>
+                            <li class="product-highlight">최종 수리일: 2024-12-03</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order-item">
+            <div class="product-header">
+                <div class="product-title">부품 : PLC</div>
+                <div class="product-price">1,239,900원 · 3개</div>
+            </div>
+            <div class="product-body">
+                <div class="product-thumbnail">
+                    <img src="test1.png" alt="제품 이미지"/>
+                </div>
+                <div class="product-details">
+                    <div class="product-info">
+                        <ul>
+                            <li>총 수리 횟수: 1회</li>
+                            <li>출장서비스 횟수: 1회</li>
+                            <li>평균 대기 시간: 2일</li>
+                            <li>최종 수리일: 2023-04-03</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        &lt;!&ndash;        <div class="suggest_info">
+                    <span class="title">💡 Agentron 제안</span>
+                    <span class="body">제품명 : WIZ0050C / 통신포트 에 대해서 총 수리 횟수가 8회입니다 ! 마지막 오류 원인은 "M01통신 알람 문제" 였어요. </span>
+                </div>&ndash;&gt;
+    </div>
+</template>-->

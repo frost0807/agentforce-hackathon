@@ -1,0 +1,29 @@
+<!--
+ - Created by Jiae.Tak on 2025-05-28.
+ -->
+
+<!-- Lwc Self Check List -->
+<template>
+    <div class="container slds-p-around_medium">
+        <div class="suggest_info">
+            <span class="title">💡 Agentron 자가 점검 리스트</span>
+        </div>
+        <div class="item">
+            <span class="title">자가점검 리스트</span>
+            <div class="detail">
+                <template for:each={checklist} for:item="item" for:index="index">
+                    <label key={item.id} class="checkbox-label">
+                        <input type="checkbox"
+                               checked={item.isCheck}
+                               data-index={index}
+                               onchange={handleCheckboxChange}/>
+                        {item.detail}
+                    </label>
+                </template>
+            </div>
+            <div class="button-container">
+                <button class="submit-btn" onclick={handleSubmit} disabled={isSubmitDisabled}>제출하기</button>
+            </div>
+        </div>
+    </div>
+</template>

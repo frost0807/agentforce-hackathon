@@ -1,0 +1,237 @@
+<template>
+    <template if:true={isLoading}>
+        <div class="loading-overlay">
+            <lightning-spinner alternative-text="데이터 로딩 중..." size="large"></lightning-spinner>
+            <div class="loading-message">
+                <h3>견적서 데이터를 불러오는 중입니다...</h3>
+                <p>잠시만 기다려주세요.</p>
+            </div>
+        </div>
+    </template>
+
+    <template if:false={isLoading}>
+        <div class="quote-container">
+            <div class="quote-title-section">
+                <h1 class="main-title">견적서</h1>
+                <div class="company-logo">
+                    <template if:true={companyLogoUrl}>
+                        <img src={companyLogoUrl}
+                             alt="LSMTRON"
+                             class="logo-image"
+                             onerror={handleImageError}
+                             onload={handleImageLoad}>
+                    </template>
+                    <template if:false={companyLogoUrl}>
+                        <div class="logo-text">
+                            <div class="company-name">LSMTRON</div>
+                            <div class="company-tagline">Solutions & Technology</div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="parts-section">
+                <h2 class="section-header">■ 견적 항목</h2>
+                <table class="parts-table">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>품목명</th>
+                        <th>규격</th>
+                        <th>수량</th>
+                        <th>단가</th>
+                        <th>금액</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <template for:each={lineItems} for:item="item" for:index="index">
+                        <tr key={item.Id}>
+                            <td class="center">{item.displayIndex}</td>
+                            <td>{item.ProductName}</td>
+                            <td>{item.ProductClassification}</td>
+                            <td class="center">{item.Quantity__c}</td>
+                            <td class="right">{item.formattedUnitPrice}</td>
+                            <td class="right">{item.formattedTotalPrice}</td>
+                        </tr>
+                    </template>
+                    <template if:false={hasLineItems}>
+                        <tr>
+                            <td class="center">1</td>
+                            <td>Auxiliary equipment</td>
+                            <td>LSM 기타(부속품)
+                                &lt;5 모수연&gt; (다상,15 DS)</td>
+                            <td class="center">1</td>
+                            <td class="right">20,000,000</td>
+                            <td class="right">20,000,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">2</td>
+                            <td>Auxiliary equipment</td>
+                            <td>LSM 기타(부속품)
+                                2종(다상보정기)</td>
+                            <td class="center">1</td>
+                            <td class="right">2,820,000</td>
+                            <td class="right">2,820,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">3</td>
+                            <td>Auxiliary equipment</td>
+                            <td>LSM 기타(부속품) 저압용(5kW이상보정기)</td>
+                            <td class="center">1</td>
+                            <td class="right">13,560,000</td>
+                            <td class="right">13,560,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">4</td>
+                            <td>Auxiliary equipment</td>
+                            <td>LSM 기타(부속품) tank 7kg</td>
+                            <td class="center">2</td>
+                            <td class="right">950,000</td>
+                            <td class="right">1,900,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">5</td>
+                            <td>Option</td>
+                            <td>LSM 기타(부속품) 측정용 하이드로미터 접촉식
+                                (컨터)</td>
+                            <td class="center">1</td>
+                            <td class="right">280,000</td>
+                            <td class="right">280,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">6</td>
+                            <td>Option</td>
+                            <td>LSM 기타(부속품) 측정 그리스</td>
+                            <td class="center">2</td>
+                            <td class="right">40,000</td>
+                            <td class="right">80,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">7</td>
+                            <td>Option</td>
+                            <td>LSM 기타(부속품) bar</td>
+                            <td class="center">1</td>
+                            <td class="right">20,000</td>
+                            <td class="right">20,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">8</td>
+                            <td>Option</td>
+                            <td>LSM 기타(부속품) 롤링제어기</td>
+                            <td class="center">1</td>
+                            <td class="right">2,000,000</td>
+                            <td class="right">2,000,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">9</td>
+                            <td>Option</td>
+                            <td>LSM 기타(부속품) machine pro</td>
+                            <td class="center">1</td>
+                            <td class="right">700,000</td>
+                            <td class="right">700,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">10</td>
+                            <td>Option</td>
+                            <td>안전모듈 프로젝트 세팅용 플레이트(미터널스)</td>
+                            <td class="center">1</td>
+                            <td class="right">190,000</td>
+                            <td class="right">190,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">11</td>
+                            <td>Option</td>
+                            <td>안전모듈(5v-100)</td>
+                            <td class="center">1</td>
+                            <td class="right">130,000</td>
+                            <td class="right">130,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">12</td>
+                            <td>Option</td>
+                            <td>프로젝트 메탈 몰딩세팅 A솔티</td>
+                            <td class="center">1</td>
+                            <td class="right">400,000</td>
+                            <td class="right">400,000</td>
+                        </tr>
+                    </template>
+                    <tr class="total-row">
+                        <td class="center total-label" colspan="3">합계</td>
+                        <td class="center total-quantity">{totalQuantity}</td>
+                        <td class="center total-amount-label">총액</td>
+                        <td class="right total-amount-cell">{formattedTotalAmount}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="quote-details">
+                <div class="quote-info-row">
+                    <div class="quote-info-item">
+                        <span class="label">Offer No:</span>
+                        <span class="value">{serviceQuote.OfferNo__c}</span>
+                    </div>
+                    <div class="quote-info-item">
+                        <span class="label">Quote Date:</span>
+                        <span class="value">{formattedQuoteDate}</span>
+                    </div>
+                </div>
+
+                <div class="quote-info-row">
+                    <div class="quote-info-item">
+                        <span class="label">고객사:</span>
+                        <span class="value">{accountName}</span>
+                    </div>
+                    <div class="quote-info-item">
+                        <span class="label">담당자:</span>
+                        <span class="value">{contactName}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conditions-section">
+                <table class="conditions-table">
+                    <tr>
+                        <td class="condition-label">납기:</td>
+                        <td class="condition-value">{serviceQuote.DeliveryCondition__c}</td>
+                        <td class="condition-label">결제조건:</td>
+                        <td class="condition-value">{serviceQuote.Method_of_Payment__c}</td>
+                    </tr>
+                    <tr>
+                        <td class="condition-label">포장:</td>
+                        <td class="condition-value">{serviceQuote.Packing__c}</td>
+                        <td class="condition-label">검사:</td>
+                        <td class="condition-value">{serviceQuote.Inspection__c}</td>
+                    </tr>
+                    <tr>
+                        <td class="condition-label">유효기간:</td>
+                        <td class="condition-value">{serviceQuote.Validity__c}</td>
+                        <td class="condition-label">기타:</td>
+                        <td class="condition-value">별도 명시사항 없음</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="memo-section">
+                <p>상기와 같이 견적서를 제출합니다.</p>
+            </div>
+
+            <div class="action-buttons">
+                <lightning-button
+                        label="PDF 다운로드"
+                        variant="neutral"
+                        onclick={handleDownloadPDF}
+                        disabled={isLoading}
+                        class="action-btn">
+                </lightning-button>
+            </div>
+
+            <template if:true={showSuccessMessage}>
+                <div class="success-message">
+                    <lightning-icon icon-name="utility:success" size="small"></lightning-icon>
+                    {successMessage}
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

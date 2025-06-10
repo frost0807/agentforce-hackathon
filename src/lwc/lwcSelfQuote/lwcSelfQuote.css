@@ -1,0 +1,368 @@
+/* lwcSelfQuote.css - 클래식 스타일 */
+.quote-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: white;
+    font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+    line-height: 1.4;
+    color: #000;
+    border: 2px solid #000;
+    position: relative;
+}
+
+/* 로딩 오버레이 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-message {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.loading-message h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.loading-message p {
+    margin: 0.5rem 0 0 0;
+    color: #666;
+}
+
+/* 견적서 제목 */
+.quote-title-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #000;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 4px;
+}
+
+/* 회사 로고 */
+.company-logo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 실제 로고 이미지 */
+.logo-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* 텍스트 로고 (폴백) */
+.logo-text {
+    text-align: center;
+}
+
+.company-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0066cc;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.company-tagline {
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 0.5px;
+}
+
+/* 섹션 헤더 */
+.section-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 30px 0 15px 0;
+    padding: 8px 0;
+    border-bottom: 2px solid #000;
+}
+
+/* 테이블 공통 스타일 */
+.parts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    font-size: 13px;
+    border: 1px solid #000;
+}
+
+.parts-table thead th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    padding: 6px 8px;
+    text-align: center;
+    border: 1px solid #000;
+    font-size: 14px;
+}
+
+.parts-table tbody td {
+    padding: 5px 8px;
+    border: 1px solid #000;
+    vertical-align: middle;
+    background-color: white;
+}
+
+/* 텍스트 정렬 */
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+}
+
+/* 견적서 상세 정보 */
+.quote-details {
+    margin: 30px 0;
+    padding: 20px;
+    border: 1px solid #000;
+    background-color: #f9f9f9;
+}
+
+.quote-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.quote-info-row:last-child {
+    margin-bottom: 0;
+}
+
+.quote-info-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.quote-info-item .label {
+    font-weight: bold;
+    min-width: 80px;
+    margin-right: 10px;
+}
+
+.quote-info-item .value {
+    flex: 1;
+}
+
+/* 합계 행 스타일 */
+.total-row {
+    font-weight: bold;
+}
+
+/* '합계' 행의 모든 셀에 기본적으로 회색 배경 적용 */
+.total-row td {
+    border-top: 2px solid #000;
+    padding: 8px;
+    background-color: #f5f5f5 !important;
+    font-weight: bold;
+}
+
+/* '합계', '총액' 레이블 셀은 회색 배경 유지 (위 규칙에 의해 자동 적용) */
+.total-label, .total-amount-label {
+    font-weight: bold;
+}
+
+/* --- ✨ 수정된 부분 ✨ --- */
+/* 명시도를 높여 '총 수량' 셀의 배경을 흰색으로 강제 적용 */
+.total-row .total-quantity {
+    background-color: white !important;
+    color: #000 !important;
+}
+
+/* 명시도를 높여 '총 금액' 셀의 배경을 흰색으로 강제 적용 */
+.total-row .total-amount-cell {
+    background-color: white !important;
+    color: #c41e3a !important;
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+}
+/* --- 수정 끝 --- */
+
+
+/* 견적 조건 테이블 */
+.conditions-section {
+    margin: 30px 0;
+}
+
+.conditions-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
+.conditions-table td {
+    padding: 6px 12px;
+    border: 1px solid #000;
+    font-size: 13px;
+}
+
+.condition-label {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    width: 15%;
+    text-align: center;
+}
+
+.condition-value {
+    background-color: white;
+    width: 35%;
+    padding-left: 15px;
+}
+
+/* 하단 메모 */
+.memo-section {
+    text-align: center;
+    margin: 40px 0;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+}
+
+/* 액션 버튼 */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #000;
+}
+
+.action-btn {
+    min-width: 130px;
+    font-weight: bold;
+}
+
+/* (이하 코드는 이전과 동일) */
+.success-message {
+    display: flex;
+    align-items: center;
+    background-color: #d4edda;
+    border: 2px solid #155724;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    color: #155724;
+    font-weight: 500;
+}
+
+.success-message lightning-icon {
+    margin-right: 10px;
+}
+
+@media print {
+    .quote-container {
+        border: none;
+        margin: 0;
+        padding: 20px;
+        max-width: none;
+    }
+    .action-buttons, .success-message, .loading-overlay {
+        display: none;
+    }
+    .section-header {
+        page-break-after: avoid;
+    }
+    .info-table,
+    .parts-table {
+        page-break-inside: avoid;
+    }
+}
+
+@media (max-width: 768px) {
+    .quote-container {
+        padding: 20px;
+        margin: 0;
+        border: 1px solid #000;
+    }
+    .quote-title-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    .main-title {
+        font-size: 2rem;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+    .company-logo {
+        position: static;
+        transform: none;
+        width: 100px;
+        height: 50px;
+        margin: 0 auto;
+    }
+    .quote-info-row {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+    .quote-info-item {
+        padding: 0;
+        justify-content: space-between;
+    }
+    .action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .info-table,
+    .parts-table {
+        font-size: 11px;
+    }
+    .parts-table thead th {
+        padding: 4px 4px;
+        font-size: 12px;
+    }
+    .parts-table tbody td {
+        padding: 3px 4px;
+    }
+    .total-row td {
+        padding: 6px 4px;
+    }
+    .conditions-table td {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    .condition-label {
+        width: 25%;
+    }
+    .condition-value {
+        width: 25%;
+        padding-left: 8px;
+    }
+}

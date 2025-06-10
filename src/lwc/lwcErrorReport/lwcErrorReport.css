@@ -1,0 +1,305 @@
+/**
+ * Created by Jiae.Tak on 2025-05-28.
+ */
+
+/* 기존 CSS 유지 */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.loading-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    animation: bounce 0.5s infinite alternate;
+    margin-bottom: 10px;
+}
+
+.loading-text {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1em;
+    display: flex;
+    align-items: flex-end;
+}
+
+.dots-animation {
+    display: inline-block;
+    min-width: 1em;
+    text-align: left;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.suggest_info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid #EAEDEF;
+    background: #F7F9FA;
+}
+
+.suggest_info .title {
+    text-align: left;
+    font-size: 24px;
+    font-weight: 600;
+    color: #181818;
+    margin-bottom: 10px;
+}
+
+.item {
+    padding: 25px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.item .title {
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.risk-item-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fcfcfc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+}
+
+.risk-item-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.risk-item-detail-content {
+    padding-top: 15px;
+    border-top: 1px dashed #e0e0e0;
+}
+
+.risk-item-detail-content strong {
+    color: #444;
+    margin-right: 5px;
+    font-weight: 700;
+}
+
+.risk-item-detail-content p {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.risk-item-detail-content .slds-text-heading_label {
+    font-size: 0.9em;
+    color: #777;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.slds-badge {
+    font-weight: bold;
+    padding: 0.2em 0.6em;
+    border-radius: 3px;
+}
+
+.custom-badge-margin {
+    margin-left: 15px;
+}
+
+.slds-theme_error {
+    background-color: #c23934;
+    color: white;
+}
+.slds-theme_warning {
+    background-color: #ffb75d;
+    color: white;
+}
+.slds-theme_inverse {
+    background-color: #16325c;
+    color: white;
+}
+.slds-theme_success {
+    background-color: #04844b;
+    color: white;
+}
+
+.slds-text-color_error { color: #c23934; }
+.slds-text-color_warning { color: #ffb75d; }
+.slds-text-color_success { color: #04844b; }
+.slds-text-color_destructive { color: #c23934; }
+.slds-text-color_weak { color: #525252; }
+.slds-text-color_default { color: #000000; }
+
+.chart-canvas-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* 타이핑 애니메이션 관련 스타일 - 수정됨 */
+.typing-item-container {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* 타이핑 대상 요소에 대한 스타일 */
+.typing-target {
+    position: relative;
+    display: inline;
+}
+
+/* 타이핑 중인 텍스트에 미묘한 애니메이션 효과 */
+.typing-target:empty::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: #0176d3;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+}
+
+/* 커서 깜빡임 애니메이션 */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* 아이템이 나타나는 애니메이션 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 건너뛰기 버튼 스타일 */
+.skip-animation-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.skip-animation-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* 타이핑 진행 표시 */
+.typing-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #e9ecef;
+    z-index: 9999;
+}
+
+.typing-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #0176d3, #1ab394);
+    transition: width 0.3s ease;
+}
+
+/* 타이핑 중인 필드 강조 효과 */
+.typing-target.active-typing {
+    background: linear-gradient(90deg, rgba(1, 118, 211, 0.1), rgba(26, 179, 148, 0.1));
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* 완료된 필드의 미묘한 효과 */
+.typing-target.completed {
+    animation: fieldComplete 0.5s ease-out;
+}
+
+@keyframes fieldComplete {
+    0% {
+        background-color: rgba(1, 118, 211, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .chart-canvas-container {
+        height: 250px;
+    }
+
+    .container {
+        padding: 16px 8px;
+        gap: 15px;
+    }
+
+    .suggest_info {
+        padding: 15px;
+    }
+
+    .item {
+        padding: 15px;
+    }
+
+    .risk-item-card {
+        margin-bottom: 15px;
+    }
+}

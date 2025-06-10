@@ -1,0 +1,113 @@
+<template>
+    <div class="order-detail-container">
+        <!-- 로딩 스피너 -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="로딩중..." size="medium"></lightning-spinner>
+        </template>
+
+        <!-- 에러 메시지 -->
+        <template if:true={hasError}>
+            <div class="error-container">
+                <lightning-card title="오류">
+                    <div class="slds-p-horizontal_medium">
+                        <p>{errorMessage}</p>
+                        <lightning-button
+                                variant="brand"
+                                label="다시 시도"
+                                onclick={handleSync}
+                                disabled={isLoading}>
+                        </lightning-button>
+                    </div>
+                </lightning-card>
+            </div>
+        </template>
+
+        <!-- 정상 데이터 표시 -->
+        <template if:true={isDataLoaded}>
+
+            <!-- 제목과 동기화 버튼 -->
+            <div class="header-section">
+                <h1 class="page-title">배송현황</h1>
+            </div>
+
+            <!-- 주문 정보 -->
+            <div class="order-info">
+                <span class="order-date">{trackingData.orderDate} 발송</span>
+                <span class="order-number">(송장번호: {trackingData.objTracking.Tracking_Number__c})</span>
+            </div>
+
+            <!-- 구매현황 섹션 -->
+            <div class="purchase-status-section">
+                <h2 class="section-title">
+                    {currentStepLabel}
+                    <span class="update-date">{trackingData.updateDate} 업데이트</span>
+                </h2>
+
+                <!-- 프로그레스 바 -->
+                <div class="progress-container">
+                    <div class="progress-line">
+                        <div class="progress-fill" style={progressLineStyle}></div>
+                    </div>
+                    <div class="progress-steps">
+                        <template for:each={progressSteps} for:item="step">
+                            <div key={step.Sequence__c} class={step.stepClass} data-step={step.Sequence__c} style={step.stepStyle}>
+                                <div class="step-circle"></div>
+                                <div class="step-label">{step.label}</div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 운송사 기록 -->
+            <div class="delivery-schedule-section">
+                <h3 class="subsection-title">운송사 기록</h3>
+                <div class="schedule-list">
+                    <template for:each={formattedProviderEvents} for:item="event">
+                        <div key={event.Provider_Sequence__c} class="schedule-item">
+                            <div class="schedule-icon">
+                                <div class="schedule-dot"></div>
+                            </div>
+                            <div class="schedule-content">
+                                <div class="schedule-description">{event.displayDescription}</div>
+                                <div class="schedule-datetime">{event.formattedDateTime}</div>
+                                <template if:true={event.Location__c}>
+                                    <div class="schedule-location">{event.Location__c}</div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- 스케줄이 없는 경우 -->
+                    <template if:false={formattedProviderEvents.length}>
+                        <div class="schedule-item">
+                            <div class="schedule-icon">
+                                <div class="schedule-dot"></div>
+                            </div>
+                            <div class="schedule-content">
+                                <div class="schedule-description">배송 일정 확인중</div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- 상세 배송 이벤트 (개발자 확인용, 필요시 주석 해제) -->
+            <!--
+            <template if:true={trackingData.events}>
+                <div class="events-section">
+                    <h3 class="subsection-title">배송 이벤트 상세</h3>
+                    <template for:each={trackingData.events} for:item="event">
+                        <div key={event.Id} class="event-item">
+                            <div class="event-time">{event.Event_Time__c}</div>
+                            <div class="event-description">{event.Description__c}</div>
+                            <div class="event-location">{event.Location__c}</div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            -->
+
+        </template>
+    </div>
+</template>

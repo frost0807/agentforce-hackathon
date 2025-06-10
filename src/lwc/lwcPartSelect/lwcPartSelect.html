@@ -1,0 +1,146 @@
+<template>
+    <!-- 실제 컨텐츠 - eventData가 있고 초기화가 완료된 경우에만 표시 -->
+    <template if:true={shouldShowContent}>
+        <div class="parts-container">
+            <!-- 헤더 -->
+            <div class="suggest_info slds-m-bottom_medium">
+                <span class="title slds-text-heading_medium"> ⚙️ Agentron 추천 부품 리스트</span>
+            </div>
+
+            <!-- 제품명 표시 -->
+            <div class="product-info">
+                <div>
+                    <div class="name">제품명 : <span class="product-code">{baseProductCode}</span></div>
+                    <div class="recommendation-note">💡 고객님의 자가점검 결과를 바탕으로 추천된 부품이 미리 선택되어 있으며, 이 리스트는 해당 제품에 대한 모든 부품을 포함하고 있습니다.</div>
+                </div>
+
+                <!-- 검색 및 견적서 생성 섹션 -->
+                <div class="search-and-action-container">
+                    <div class="search-container">
+                        <lightning-input
+                                type="search"
+                                label="부품 검색"
+                                placeholder="부품코드, 구매처, 부품명으로 검색..."
+                                value={searchTerm}
+                                onchange={handleSearchChange}
+                                class="search-input">
+                        </lightning-input>
+                    </div>
+                    <div class="action-container">
+                        <lightning-button
+                                label="저장"
+                                variant="brand"
+                                onclick={handleSaveSelectedParts}
+                                disabled={isSaveButtonDisabled}
+                                class="save-btn">
+                        </lightning-button>
+                        <lightning-button
+                                label="견적서 생성"
+                                variant="brand-outline"
+                                onclick={handleGenerateQuote}
+                                disabled={isQuoteButtonDisabled}
+                                class="quote-btn">
+                        </lightning-button>
+                    </div>
+                </div>
+
+                <!-- 부품 리스트 테이블 -->
+                <div class="table-container">
+                    <div class="table-header-section">
+                        <h3 class="section-title">• 부품 리스트 </h3>
+                        <div class="selection-info">
+                            <span class="selected-count">선택된 부품: {selectedCount}개</span>
+                            <template if:true={selectedCount}>
+                                <lightning-button
+                                        label="선택 해제"
+                                        variant="neutral"
+                                        size="small"
+                                        onclick={clearSelection}
+                                        class="clear-btn">
+                                </lightning-button>
+                            </template>
+                        </div>
+                    </div>
+
+                    <template if:true={hasResults}>
+                        <table class="parts-table">
+                            <thead>
+                            <tr class="table-header">
+                                <th class="checkbox-column">
+                                    <input type="checkbox" onchange={handleSelectAll} class="select-all-checkbox">
+                                </th>
+                                <th>부품코드</th>
+                                <th>부품명</th>
+                                <th>부품 구분</th>
+                                <th>교체주기</th>
+                                <th>구매처</th>
+                                <th>가격</th>
+                                <th>예상 선적일</th>
+                                <th>재고수량</th>
+                                <th>필요수량</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <template for:each={filteredProducts} for:item="product">
+                                <tr key={product.Id}
+                                    class={product.rowClass}
+                                    data-part-id={product.Id}
+                                    onclick={handleRowClick}>
+                                    <td class="checkbox-cell" onclick={handleStopPropagation}>
+                                        <input type="checkbox"
+                                               checked={product.isSelected}
+                                               class="row-checkbox"
+                                               data-part-id={product.Id}>
+                                    </td>
+                                    <td class="part-code">{product.PartCode__c}</td>
+                                    <td class="part-name">{product.PartName__c}</td>
+                                    <td class="category-cell">{product.ProductClassification__c}</td>
+                                    <td class="replacement-cycle">{product.ReplacementCycle__c}</td>
+                                    <td class="manufacturer">{product.PurchaseCompany__c}</td>
+                                    <td class="price-cell">{product.formattedPrice}</td>
+                                    <td class="shipping-lead">{product.ShippingLeadTime__c}</td>
+                                    <td class="stock-cell">
+                                        <span class={product.stockClass}>{product.StockQuantity__c}</span>
+                                    </td>
+                                    <td class="quantity-cell" onclick={handleStopPropagation}>
+                                        <input type="text"
+                                               value={product.selectedQuantity}
+                                               pattern="[0-9]*"
+                                               inputmode="numeric"
+                                               class="quantity-input"
+                                               data-part-id={product.Id}
+                                               onchange={handleQuantityChange}
+                                               onkeypress={handleNumberOnly}>
+                                    </td>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                    </template>
+
+                    <template if:false={hasResults}>
+                        <div class="no-results">
+                            <lightning-icon icon-name="utility:search" size="medium"></lightning-icon>
+                            <p>{noResultsMessage}</p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- 저장 성공 메시지 -->
+            <template if:true={showSuccessMessage}>
+                <div class="success-message">
+                    <lightning-icon icon-name="utility:success" size="small"></lightning-icon>
+                    선택된 부품이 성공적으로 저장되었습니다.
+                </div>
+            </template>
+
+            <!-- 데이터 로딩 중 스피너 (액션 수행 시) -->
+            <template if:true={isLoading}>
+                <div class="loading-overlay action-loading">
+                    <lightning-spinner alternative-text="처리 중..." size="medium"></lightning-spinner>
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

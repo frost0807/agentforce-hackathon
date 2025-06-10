@@ -1,0 +1,259 @@
+<apex:page id="TextPdfGenerator"
+           controller="TextPdfGeneratorController"
+           renderAs="pdf"
+           applyHtmlTag="false"
+           showHeader="false"
+           sidebar="false"
+           cache="false"
+           expires="600">
+    <html>
+    <head>
+        <meta charset="UTF-8"/>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS', '맑은 고딕', Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                font-size: 12px;
+                line-height: 1.4;
+                color: #333;
+                background-color: white;
+            }
+
+            /* PDF 전용 스타일 */
+            @page {
+                size: A4;
+                margin: 15mm;
+                @top-center {
+                    content: "LSMtron 자가수리 매뉴얼";
+                    font-family: 'Arial Unicode MS', Arial, sans-serif;
+                    font-size: 10px;
+                    color: #666;
+                }
+                @bottom-center {
+                    content: "페이지 " counter(page) " / " counter(pages);
+                    font-family: 'Arial Unicode MS', Arial, sans-serif;
+                    font-size: 9px;
+                    color: #666;
+                }
+            }
+
+            /* 페이지 분할 */
+            .page-break {
+                page-break-before: always;
+            }
+
+            /* 제목 스타일 */
+            h1 {
+                color: #0176d3;
+                font-size: 18px;
+                margin: 15px 0 10px 0;
+                border-bottom: 2px solid #0176d3;
+                padding-bottom: 5px;
+                page-break-after: avoid;
+            }
+
+            h2 {
+                color: #dc3545;
+                font-size: 16px;
+                margin: 20px 0 8px 0;
+                border-bottom: 1px solid #dc3545;
+                padding-bottom: 3px;
+                page-break-after: avoid;
+            }
+
+            h3 {
+                color: #6f42c1;
+                font-size: 14px;
+                margin: 15px 0 5px 0;
+                page-break-after: avoid;
+            }
+
+            /* 문단 스타일 */
+            p {
+                margin: 8px 0;
+                text-align: justify;
+                word-break: keep-all;
+                orphans: 2;
+                widows: 2;
+            }
+
+            /* 강조 텍스트 */
+            strong {
+                font-weight: bold;
+                color: #495057;
+            }
+
+            /* 리스트 스타일 */
+            ul, ol {
+                margin: 8px 0;
+                padding-left: 20px;
+            }
+
+            li {
+                margin: 3px 0;
+            }
+
+            /* 테이블 스타일 */
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 10px 0;
+                font-size: 11px;
+                page-break-inside: avoid;
+            }
+
+            th, td {
+                border: 1px solid #ddd;
+                padding: 6px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+
+            /* 경고 박스 */
+            .warning-box {
+                background-color: #fff3cd;
+                border: 2px solid #ffc107;
+                border-radius: 4px;
+                padding: 10px;
+                margin: 10px 0;
+                font-size: 11px;
+                page-break-inside: avoid;
+            }
+
+            .warning-title {
+                color: #856404;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            /* 단계 박스 */
+            .step-box {
+                background-color: #f8f9fa;
+                border-left: 4px solid #0176d3;
+                padding: 8px 12px;
+                margin: 8px 0;
+                border-radius: 0 3px 3px 0;
+                page-break-inside: avoid;
+            }
+
+            .step-number {
+                color: #0176d3;
+                font-weight: bold;
+                font-size: 13px;
+            }
+
+            /* 푸터 스타일 */
+            .footer {
+                margin-top: 30px;
+                text-align: center;
+                font-size: 9px;
+                color: #666;
+                border-top: 1px solid #dee2e6;
+                padding-top: 10px;
+            }
+
+            /* 헤더 스타일 */
+            .header {
+                text-align: center;
+                margin-bottom: 25px;
+                border-bottom: 2px solid #0176d3;
+                padding-bottom: 15px;
+                page-break-after: avoid;
+            }
+
+            .header h1 {
+                border-bottom: none;
+                margin-bottom: 5px;
+                font-size: 20px;
+            }
+
+            .header p {
+                color: #666;
+                font-size: 10px;
+                margin: 3px 0;
+            }
+
+            /* 컨텐츠 영역 */
+            .content {
+                margin: 15px 0;
+            }
+
+            /* 이모지 스타일 */
+            .emoji {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .emoji-warning { color: #dc3545; }
+            .emoji-tool { color: #0176d3; }
+            .emoji-success { color: #28a745; }
+            .emoji-error { color: #dc3545; }
+            .emoji-info { color: #6f42c1; }
+
+            /* 줄바꿈 처리 */
+            br {
+                line-height: 1.2;
+            }
+
+            /* 들여쓰기 */
+            .indent {
+                margin-left: 15px;
+            }
+
+            /* 중요 정보 박스 */
+            .info-box {
+                background-color: #e7f3ff;
+                border: 1px solid #0176d3;
+                border-radius: 4px;
+                padding: 10px;
+                margin: 10px 0;
+                font-size: 11px;
+                page-break-inside: avoid;
+            }
+
+            .info-title {
+                color: #0176d3;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            /* 오류 스타일 */
+            .error-container {
+                background-color: #f8d7da;
+                border: 1px solid #dc3545;
+                border-radius: 4px;
+                padding: 15px;
+                margin: 20px 0;
+                color: #721c24;
+            }
+
+            .error-title {
+                color: #dc3545;
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            /* 페이지 내에서 요소 분할 방지 */
+            div {
+                page-break-inside: avoid;
+            }
+
+            /* 이미지 스타일 (필요시) */
+            img {
+                max-width: 100%;
+                height: auto;
+                page-break-inside: avoid;
+            }
+        </style>
+    </head>
+    <body>
+    <apex:outputText value="{!geminiResponseText}" escape="false"/>
+    </body>
+    </html>
+</apex:page>

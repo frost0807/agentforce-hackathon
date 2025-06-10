@@ -1,0 +1,62 @@
+<!--
+ - Created by Jiae.Tak on 2025-05-29.
+ -->
+<!-- Lwc Agentron Analysis -->
+<template>
+    <!--공통 데이터 분석 Spinner-->
+    <template if:true={isLoading}>
+        <c-lwc-spinner></c-lwc-spinner>
+    </template>
+    <!--  공통 일반 Spinner  -->
+    <template if:true={isLoadingNormal}>
+        <div class="slds-spinner_container">
+            <lightning-spinner></lightning-spinner>
+        </div>
+    </template>
+
+    <!--예측 에러 리포트 / Error_Report -->
+    <template if:true={showErrorReport}>
+        <c-lwc-error-report onloadingchange={handleChildLoadingChange}></c-lwc-error-report>
+    </template>
+
+    <!--자가 점검 리스트-->
+    <template if:true={showSelfCheckList}>
+        <c-lwc-self-check-list
+                event-data={receivedData}
+                onselfcheckcompleted={handleSelfCheckCompleted}
+                onloadingchange={handleChildLoadingChange}>
+        </c-lwc-self-check-list>
+
+    </template>
+
+    <!--자가 점검 기반 행동 추천-->
+    <template if:true={showActionRec}>
+        <c-lwc-action-rec
+                lwc:ref="refActionRec"
+                report-id={reportId}
+                onactionreccompleted={handleActionRecommend}
+                onloadingchange={handleChildLoadingChange}>
+        </c-lwc-action-rec>
+    </template>
+
+    <!--    &lt;!&ndash;메뉴얼&ndash;&gt;-->
+    <!--    <template if:true={showSummaryManual}>-->
+    <!--        <c-lwc-summary-manual></c-lwc-summary-manual>-->
+    <!--    </template>-->
+
+    <template if:true={showPartSelect}>
+        <c-lwc-part-select
+                event-data={receivedData}
+                onloadingchange={handleChildLoadingChange}></c-lwc-part-select>
+    </template>
+
+    <template if:true={showSelfQuote}>
+        <c-lwc-self-quote onloadingchange={handleChildLoadingChange}></c-lwc-self-quote>
+    </template>
+
+    <template if:true={showTrackingStatus}>
+        <c-lwc-tracking-status tracking-id={trackingId}></c-lwc-tracking-status>
+    </template>
+
+    <!--    <div class="slds-text-body_regular slds-text-color_weak slds-p-vertical_large">연결 상태: {connectionStatus}</div>-->
+</template>

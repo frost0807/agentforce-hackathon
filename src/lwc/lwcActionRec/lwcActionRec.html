@@ -1,0 +1,67 @@
+<!--
+ - Created by Jiae.Tak on 2025-05-29.
+ -->
+
+<template>
+    <div class="container slds-p-around_medium">
+        <div class="suggest_info">
+            <span class="title">💡 Agentron 자가 점검 기반 행동 추천</span>
+            <p class="instruction-text">
+                가장 적합한 1개 이상의 행동을 선택해주세요. 선택 완료 후 Agentron 에게 알려주세요!
+            </p>
+            <template if:true={checkedCount}>
+                <div class="info-bottom-row">
+                    <div class="item-checked">
+                        ✅ {checkedCount}개 항목이 선택되었습니다.
+                    </div>
+<!--                    <button class="submit-btn" onclick={handleSubmit}>제출하기</button>-->
+                    <template lwc:if={showDownloadButton}>
+                        <button class="submit-btn"
+                                onclick={handleDownloadManual}>매뉴얼 다운</button>
+                    </template>
+                </div>
+            </template>
+        </div>
+
+        <template if:true={errorMessage}>
+            <div class="slds-notify slds-notify_alert slds-theme_error" role="alert">
+                <span class="slds-assistive-text">Error:</span>
+                <h2>{errorMessage}</h2>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+            <template if:true={analysisSummary}>
+                <div class="analysis-summary-section">
+                    <h3>📊 분석 요약</h3>
+                    <p>{analysisSummary}</p>
+                </div>
+                <hr>
+            </template>
+
+            <template for:each={recommendItem} for:item="item">
+                <div key={item.actionIndex} class={item.cssClass} data-id={item.actionIndex} onclick={handleItemClick}>
+                    <div class="top-section">
+                        <div class="number">{item.actionIndex}</div>
+                        <div class="detail">
+                            <ul>
+                                <li>고장유형 : {item.type}</li>
+                                <li>고장세부유형 : {item.subType}</li>
+                                <li>고장원인 : {item.reason}</li>
+                                <li>결함위치 : {item.location}</li>
+                                <template if:true={item.formattedPartsNeeded}>
+                                    <li>
+                                        필요부품(수량) : <strong>{item.formattedPartsNeeded}</strong>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="action">
+                        🔧 <strong>추천 행동:</strong> {item.action}
+                    </div>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

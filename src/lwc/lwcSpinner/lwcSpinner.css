@@ -1,0 +1,47 @@
+/**
+ * Created by Jiae.Tak on 2025-06-08.
+ */
+.spinner-overlay {
+    position: fixed; /* 화면에 고정 */
+    top: 0;
+    left: 0;
+    width: 100vw;   /* 뷰포트 너비 전체 */
+    height: 100vh;  /* 뷰포트 높이 전체 */
+    background-color: rgba(255, 255, 255, 0.8); /* 반투명 배경 */
+    display: flex; /* Flexbox를 사용하여 내용 정렬 */
+    flex-direction: column; /* 이미지와 텍스트가 세로로 정렬되도록 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    z-index: 10000; /* 다른 요소들 위에 표시 */
+}
+
+/* 로봇 이미지 스타일 */
+.loading-image {
+    width: 80px; /* 이미지 크기 (조절 가능) */
+    height: 80px; /* 이미지 크기 (조절 가능) */
+    object-fit: contain; /* 이미지 비율 유지 */
+    animation: bounce 0.5s infinite alternate; /* 위아래로 흔들리는 애니메이션 */
+    margin-bottom: 10px; /* 이미지와 텍스트 사이 간격 */
+}
+
+/* 로딩 텍스트 스타일 */
+.loading-text {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1em; /* 폰트 크기 조절 */
+    display: flex; /* 텍스트와 마침표를 한 줄에 정렬하기 위해 flexbox 사용 */
+    align-items: flex-end; /* 마침표가 텍스트 하단에 정렬되도록 */
+}
+
+/* 애니메이션 정의 */
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); } /* 위로 이동하는 높이 (조절 가능) */
+}
+
+/* 마침표를 담을 공간만 정의합니다. */
+.dots-animation {
+    display: inline-block;
+    min-width: 1em; /* 마침표가 나타나도 텍스트가 흔들리지 않도록 최소 너비 지정 */
+    text-align: left; /* 마침표가 항상 왼쪽에 정렬되도록 */
+}

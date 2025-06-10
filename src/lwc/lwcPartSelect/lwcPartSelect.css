@@ -1,0 +1,475 @@
+/* lwcPartSelect.css */
+.parts-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.suggest_info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid #EAEDEF;
+    background: #F7F9FA;
+}
+
+.suggest_info .title {
+    text-align: left;
+    font-size: 24px;
+    font-weight: 600;
+    color: #181818;
+    margin-bottom: 10px;
+}
+.product-info {
+    margin-top:10px;
+    margin-bottom:10px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 25px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+.product-info .name {
+     text-align: left;
+     font-size: 21px;
+     font-weight: 600;
+     margin-left : 20px;
+ }
+.product-info .recommendation-note {
+    font-size: 13px; /* 글씨 크기 조정 */
+    margin-top: 10px; /* 제목과의 간격 */
+    line-height: 1.5;
+    font-weight: 500;
+    margin-left : 10px;
+    margin-bottom:30px;
+    background-color: #f0f6ff;
+    border-left: 4px solid #51a1e6;
+    padding: 10px 14px;
+    border-radius: 4px;
+    color: #333;
+ }
+
+.product-code {
+    color: #003378;
+    font-weight: 700;
+    font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
+    font-size: 25px; /* 제품 코드(LSG0170E) 텍스트 크기 조정 */
+    margin-left: 0.25em; /* 콜론(:) 뒤에 약간의 간격 추가 */
+}
+
+.product-details {
+    margin-bottom: 1rem;
+}
+
+.detail-item {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #666;
+    /* font-size는 .parts-container에서 상속받아 자동 증가 */
+}
+
+.indent {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+.highlight-text {
+    color: #d63031;
+    font-weight: 500;
+}
+
+
+.bold-text {
+    font-weight: 600;
+    color: #333;
+}
+
+.search-and-action-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    margin-left: 20px;
+    gap: 1.5rem;
+}
+
+.search-container {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.search-input {
+    max-width: 400px;
+}
+
+.action-container {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    gap: 0; /* 버튼 사이 간격 제거 */
+}
+
+.save-btn,
+.quote-btn {
+    padding-top: 0.6rem; /* 버튼 높이 증가 */
+    padding-bottom: 0.6rem;
+    line-height: normal;
+}
+
+.save-btn {
+    min-width: 80px;
+    --slds-c-button-radius-border-top-right: 0;
+    --slds-c-button-radius-border-bottom-right: 0;
+    margin-right: -1px; /* 테두리 겹침으로 그룹 효과 */
+}
+
+.quote-btn {
+    min-width: 120px;
+    --slds-c-button-radius-border-top-left: 0;
+    --slds-c-button-radius-border-bottom-left: 0;
+}
+
+
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.selection-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.selected-count {
+    font-size: 0.9rem; /* .parts-container의 font-size 변경에 따라 자동 증가 */
+    color: #0176d3;
+    font-weight: 600;
+}
+
+.clear-btn {
+    font-size: 0.8rem; /* .parts-container의 font-size 변경에 따라 자동 증가 */
+}
+
+.section-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem; /* .parts-container의 font-size 변경에 따라 자동 증가 */
+    font-weight: 600;
+    color: #333;
+    letter-spacing: -0.01em;
+}
+
+.search-info {
+    font-size: 0.9rem; /* .parts-container의 font-size 변경에 따라 자동 증가 */
+    color: #0176d3;
+    font-weight: normal;
+}
+
+.parts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 16px; /* 표 내부 글씨: 이전 15px에서 1px 추가 증가 */
+    font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.table-header {
+    background-color: #f1f5f9;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.table-header th {
+    padding: 6px 8px; /* 셀 패딩 최소화 유지 */
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    border-right: 1px solid #e5e7eb;
+    font-size: 15px; /* 표 내부 글씨: 이전 17px에서 1px 추가 증가 */
+    letter-spacing: 0.02em;
+}
+
+.table-header th:last-child {
+    border-right: none;
+}
+
+.table-row {
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.table-row:hover {
+    background-color: #f9fafb;
+}
+
+.table-row.selected {
+    background-color: #dbeafe !important;
+    border-left: 4px solid #0176d3;
+}
+
+.table-row.selected:hover {
+    background-color: #bfdbfe !important;
+}
+
+.table-row td {
+    padding: 4px 8px; /* 셀 패딩 최소화 유지 */
+    border-right: 1px solid #f3f4f6;
+    vertical-align: middle;
+    font-size: 13px; /* 표 내부 글씨: 이전 15px(또는 셀별 설정)에서 1px 추가 증가, .parts-table 기본값과 동일하게 */
+    line-height: 1.4;
+}
+
+.table-row td:last-child {
+    border-right: none;
+}
+
+.part-code {
+    font-weight: 600;
+    color: #0176d3;
+    font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
+    font-size: 15px; /* 표 내부 글씨: 이전 14px에서 1px 추가 증가 */
+}
+
+.part-name {
+    font-weight: 500;
+    color: #333;
+    font-size: 16px; /* 표 내부 글씨: 이전 15px에서 1px 추가 증가 */
+}
+
+.category-cell {
+    background-color: #f0f9ff;
+    color: #0369a1;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 15px; /* 표 내부 글씨: 이전 14px에서 1px 추가 증가 */
+}
+.table-row.selected .category-cell {
+    background-color: #a7d3ed; /* 선택 시 더 진한 파랑 */
+    color: #00224d; /* 선택 시 더 진한 글씨색 */
+}
+.replacement-cycle {
+    font-weight: 500;
+    color: #059669;
+    font-size: 15px; /* 표 내부 글씨: 이전 14px에서 1px 추가 증가 */
+}
+
+.manufacturer {
+    font-weight: 500;
+    color: #059669;
+    font-size: 15px; /* 표 내부 글씨: 이전 14px에서 1px 추가 증가 */
+}
+
+.price-cell {
+    font-weight: 600;
+    color: #dc2626;
+    text-align: right;
+    font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
+    font-size: 15px; /* 표 내부 글씨: 이전 14px에서 1px 추가 증가 */
+}
+
+.shipping-lead {
+    font-weight: 500;
+    color: #6b7280;
+    font-size: 15px; /* 표 내부 글씨: 이전 14px에서 1px 추가 증가 */
+}
+
+.checkbox-column {
+    width: 40px;
+    text-align: center;
+}
+
+.checkbox-cell {
+    text-align: center;
+    width: 40px;
+}
+
+.row-checkbox {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+.select-all-checkbox {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+.stock-cell {
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px; /* 표 내부 글씨: 이전 14px에서 1px 추가 증가 */
+}
+
+.stock-normal {
+    color: #059669;
+}
+
+.stock-low {
+    color: #d97706;
+}
+
+.stock-out {
+    color: #dc2626;
+}
+
+.quantity-cell {
+    text-align: center;
+    width: 80px;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 4px 8px; /* 입력 필드 내부 패딩은 유지 */
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 15px; /* 표 내부 글씨: 이전 14px에서 1px 추가 증가 */
+    font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
+    -moz-appearance: textfield;
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantity-input:focus {
+    border-color: #0176d3;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(1, 118, 211, 0.2);
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+}
+
+.no-results p {
+    margin-top: 1rem;
+    font-size: 1.1rem; /* .parts-container의 font-size 변경에 따라 자동 증가 */
+}
+
+.recommendations {
+    background-color: #fffbeb;
+    border: 1px solid #fbbf24;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.recommendation-item {
+    margin-bottom: 0.5rem;
+    color: #92400e;
+    /* font-size는 .parts-container에서 상속받아 자동 증가 */
+    line-height: 1.5;
+}
+
+.recommendation-item:last-child {
+    margin-bottom: 0;
+}
+
+.success-message {
+    display: flex;
+    align-items: center;
+    background-color: #d1fae5;
+    border: 1px solid #10b981;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    color: #065f46;
+    font-weight: 500;
+}
+
+.success-message lightning-icon {
+    margin-right: 0.5rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .parts-container {
+        padding: 0.5rem;
+        font-size: 18px; /* 표 바깥 글씨(반응형): 이전 15px에서 3px 추가 증가 */
+    }
+
+    .header {
+        padding: 0.75rem;
+    }
+
+    .header-title {
+        font-size: 1.2rem; /* .parts-container의 font-size 변경에 따라 자동 증가 */
+    }
+
+    /* 반응형에서 제품명 부분 크기 조정 */
+    .product-info h3 {
+        font-size: 20px; /* 반응형 "제품명 :" 텍스트 크기 (데스크탑 24px 보다 작게 조정) */
+    }
+
+    .product-code {
+        font-size: 24px; /* 반응형 제품 코드 텍스트 크기 (데스크탑 28px 보다 작게 조정) */
+    }
+
+    .parts-table {
+        font-size: 15px; /* 표 내부 글씨(반응형): 이전 14px에서 1px 추가 증가 */
+    }
+
+    .table-header th {
+        padding: 4px 4px; /* 셀 패딩 최소화 유지 */
+        font-size: 17px; /* 표 내부 글씨(반응형): 이전 16px에서 1px 추가 증가 */
+    }
+    .table-row td {
+        padding: 3px 4px; /* 셀 패딩 최소화 유지 */
+        font-size: 14px; /* 표 내부 글씨(반응형): 이전 13px에서 1px 추가 증가 */
+    }
+
+    .search-and-action-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .search-input {
+        max-width: 100%;
+    }
+
+    .action-container {
+        align-self: stretch;
+        justify-content: flex-start;
+    }
+}
+
+/* 스크롤 가능한 테이블 */
+@media (max-width: 1024px) {
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .parts-table {
+        min-width: 1200px;
+    }
+
+    .table-header-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
